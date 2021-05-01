@@ -1,6 +1,7 @@
 ﻿  Assingment06.cpp
-C:\Users\Russell\Desktop\Assignment06-main\Assingment06\Assingment06.cpp(29,47): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Russell\Desktop\Assignment06-main\Assingment06\Assingment06.cpp(29,47): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
-C:\Users\Russell\Desktop\Assignment06-main\Assingment06\Assingment06.cpp(48,15): warning C4326: return type of 'main' should be 'int' instead of 'void'
-C:\Users\Russell\Desktop\Assignment06-main\Assingment06\Assingment06.cpp(66,15): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
-  Assingment06.vcxproj -> C:\Users\Russell\Desktop\Assignment06-main\x64\Debug\Assingment06.exe
+C:\Users\RA068632\Documents\Assignment06-main\Assingment06\Assingment06.cpp(29,47): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\RA068632\Documents\Assignment06-main\Assingment06\Assingment06.cpp(29,47): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\RA068632\Documents\Assignment06-main\Assingment06\Assingment06.cpp(89,66): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\RA068632\Documents\Assignment06-main\Assingment06\Assingment06.cpp(107,15): warning C4326: return type of 'main' should be 'int' instead of 'void'
+C:\Users\RA068632\Documents\Assignment06-main\Assingment06\Assingment06.cpp(125,15): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+  Assingment06.vcxproj -> C:\Users\RA068632\Documents\Assignment06-main\x64\Debug\Assingment06.exe

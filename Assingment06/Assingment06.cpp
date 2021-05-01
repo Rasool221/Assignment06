@@ -24,25 +24,84 @@ void addToHashTable (const pair<string,char> toAdd, list<char>* &hashTable, int 
 	hashTable [ calculatedIndex ].push_back ( toAdd.second );
 }
 
-void removeFromHashTable ( const char valueToLookFor, list<char>* &hashTable )
+void removeFromHashTable ( const char valueToLookFor, list<char>* hashTable, const int hashSize )
 {
 	const int hashTableSize = hashTable->size ( );
 
 	// Iterate through the hash table
-	for ( int i = 0; i < hashTableSize; ++i )
+	for ( int i = 0; i < hashSize; ++i )
 	{
 		list<char>::iterator b = hashTable [ i ].begin ( );
 		list<char>::iterator e = hashTable [ i ].end ( );
 
 		// Iterate through the linked list
-		for ( ; b != e; b++ ) {
+		for ( ; b != e;  ) {
+
 			if ( *b == valueToLookFor )
 			{
 				// Remove item
-				hashTable [ i ].remove ( *b );
+				b = hashTable [ i ].erase ( b );
+			}
+			else
+			{
+				// If not found, we increment (saves errors)
+				++b;
 			}
 		}
 	}
+}
+
+void traverseTheHashTable ( list<char>* hashTable, const int hashSize )
+{
+	for ( int i = 0; i < hashSize; ++i ) 
+	{
+		cout << i << ": ";
+
+		list<char>::iterator b = hashTable [ i ].begin ( );
+		list<char>::iterator e = hashTable [ i ].end ( );
+
+		for ( ; b != e; b++ ) {
+			cout << *b << "->";
+		}
+
+		cout << "NULL" << endl;
+	}
+}
+
+list<char>* rehashTable (list<char>* oldHashTable, const int oldSize, const int newSize )
+{
+	list<char>* newTable = new list<char>[newSize] ;
+
+	for ( int i = 0; i < oldSize; ++i )
+	{
+		list<char>::iterator b = oldHashTable [ i ].begin ( );
+		list<char>::iterator e = oldHashTable [ i ].end ( );
+
+		pair<string, char> currentPair;
+		int currentIndex = 0;
+		
+		for ( ; b != e; ) {
+			currentPair.second = *b;
+			string randomString = to_string ( *b ) + to_string ( time ( NULL ) );
+			currentPair.first = randomString;
+			for ( int c = 0; c < 5; ++c )
+			{
+				currentIndex += c * 3.1415 * sqrt ( pow ( c, rand ( ) % 3 ) );
+			}
+			currentIndex %= newSize;
+			newTable [ currentIndex ].push_back ( currentPair.second );
+
+			b = oldHashTable [ i ].erase ( b );
+	
+			if ( b != e )
+			{
+				++b;
+			}
+		}
+	}
+
+	delete [ ] oldHashTable;
+	return newTable;
 }
 
 void main ( ) {
@@ -79,9 +138,8 @@ void main ( ) {
 	// Adding to list
 	pair<string, char> *toadd = new pair<string, char> ( "nbn", 'X' );
 	
-
 	addToHashTable ( *toadd, hashTab, hashSize );
-	removeFromHashTable ( 'X', hashTab );
+	removeFromHashTable ( 'X', hashTab, hashSize );
 
 	for ( int i = 0; i < hashSize; i++ ) {
 		cout << i << ": ";
@@ -92,7 +150,10 @@ void main ( ) {
 		}
 		cout << "NULL" << endl;
 	}
-	delete [ ] hashTab;
 
+	hashTab = rehashTable ( hashTab, hashSize, 30 );
+	traverseTheHashTable ( hashTab, 30 );
+		
+	delete [ ] hashTab;
 	system ( "pause" );
 }
