@@ -24,11 +24,25 @@ void addToHashTable (const pair<string,char> toAdd, list<char>* &hashTable, int 
 	hashTable [ calculatedIndex ].push_back ( toAdd.second );
 }
 
-void removeFromHashTable ( const char valueToLookFor, list<char>*& hashTable )
+void removeFromHashTable ( const char valueToLookFor, list<char>* &hashTable )
 {
 	const int hashTableSize = hashTable->size ( );
 
-	
+	// Iterate through the hash table
+	for ( int i = 0; i < hashTableSize; ++i )
+	{
+		list<char>::iterator b = hashTable [ i ].begin ( );
+		list<char>::iterator e = hashTable [ i ].end ( );
+
+		// Iterate through the linked list
+		for ( ; b != e; b++ ) {
+			if ( *b == valueToLookFor )
+			{
+				// Remove item
+				hashTable [ i ].remove ( *b );
+			}
+		}
+	}
 }
 
 void main ( ) {
@@ -64,8 +78,10 @@ void main ( ) {
 
 	// Adding to list
 	pair<string, char> *toadd = new pair<string, char> ( "nbn", 'X' );
+	
 
 	addToHashTable ( *toadd, hashTab, hashSize );
+	removeFromHashTable ( 'X', hashTab );
 
 	for ( int i = 0; i < hashSize; i++ ) {
 		cout << i << ": ";
